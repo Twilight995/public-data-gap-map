@@ -1,0 +1,212 @@
+{
+ "national": {
+  "highPct": 17.8,
+  "campPer1000": 160
+ },
+ "regions": [
+  {
+   "sido": "대구광역시",
+   "registered": 12023,
+   "high": 2625,
+   "camp": 325,
+   "orgs": 10,
+   "highPct": 21.8,
+   "campPer1000": 124,
+   "perOrg": 1202,
+   "level": "red",
+   "reason": "고의존자 비율은 전국 평균보다 높은데 금연캠프 이용은 평균보다 적습니다."
+  },
+  {
+   "sido": "부산광역시",
+   "registered": 12125,
+   "high": 2561,
+   "camp": 403,
+   "orgs": 17,
+   "highPct": 21.1,
+   "campPer1000": 157,
+   "perOrg": 713,
+   "level": "red",
+   "reason": "고의존자 비율은 전국 평균보다 높은데 금연캠프 이용은 평균보다 적습니다."
+  },
+  {
+   "sido": "전북특별자치도",
+   "registered": 8519,
+   "high": 1783,
+   "camp": 314,
+   "orgs": 16,
+   "highPct": 20.9,
+   "campPer1000": 176,
+   "perOrg": 532,
+   "level": "orange",
+   "reason": "고의존자 비율이 전국 평균보다 높습니다."
+  },
+  {
+   "sido": "대전광역시",
+   "registered": 5927,
+   "high": 1230,
+   "camp": 359,
+   "orgs": 6,
+   "highPct": 20.8,
+   "campPer1000": 292,
+   "perOrg": 988,
+   "level": "orange",
+   "reason": "고의존자 비율이 전국 평균보다 높습니다."
+  },
+  {
+   "sido": "충청남도",
+   "registered": 11309,
+   "high": 2336,
+   "camp": 393,
+   "orgs": 17,
+   "highPct": 20.7,
+   "campPer1000": 168,
+   "perOrg": 665,
+   "level": "orange",
+   "reason": "고의존자 비율이 전국 평균보다 높습니다."
+  },
+  {
+   "sido": "충청북도",
+   "registered": 8772,
+   "high": 1762,
+   "camp": 279,
+   "orgs": 15,
+   "highPct": 20.1,
+   "campPer1000": 158,
+   "perOrg": 585,
+   "level": "red",
+   "reason": "고의존자 비율은 전국 평균보다 높은데 금연캠프 이용은 평균보다 적습니다."
+  },
+  {
+   "sido": "경상남도",
+   "registered": 16541,
+   "high": 3313,
+   "camp": 359,
+   "orgs": 22,
+   "highPct": 20.0,
+   "campPer1000": 108,
+   "perOrg": 752,
+   "level": "red",
+   "reason": "고의존자 비율은 전국 평균보다 높은데 금연캠프 이용은 평균보다 적습니다."
+  },
+  {
+   "sido": "강원특별자치도",
+   "registered": 9287,
+   "high": 1848,
+   "camp": 281,
+   "orgs": 19,
+   "highPct": 19.9,
+   "campPer1000": 152,
+   "perOrg": 489,
+   "level": "red",
+   "reason": "고의존자 비율은 전국 평균보다 높은데 금연캠프 이용은 평균보다 적습니다."
+  },
+  {
+   "sido": "경상북도",
+   "registered": 16343,
+   "high": 2991,
+   "camp": 543,
+   "orgs": 25,
+   "highPct": 18.3,
+   "campPer1000": 182,
+   "perOrg": 654,
+   "level": "orange",
+   "reason": "고의존자 비율이 전국 평균보다 높습니다."
+  },
+  {
+   "sido": "전라남도",
+   "registered": 11724,
+   "high": 2123,
+   "camp": 375,
+   "orgs": 23,
+   "highPct": 18.1,
+   "campPer1000": 177,
+   "perOrg": 510,
+   "level": "orange",
+   "reason": "고의존자 비율이 전국 평균보다 높습니다."
+  },
+  {
+   "sido": "인천광역시",
+   "registered": 13923,
+   "high": 2489,
+   "camp": 404,
+   "orgs": 11,
+   "highPct": 17.9,
+   "campPer1000": 162,
+   "perOrg": 1266,
+   "level": "orange",
+   "reason": "고의존자 비율이 전국 평균보다 높습니다."
+  },
+  {
+   "sido": "세종특별자치시",
+   "registered": 1149,
+   "high": 199,
+   "camp": 0,
+   "orgs": 1,
+   "highPct": 17.3,
+   "campPer1000": 0,
+   "perOrg": 1149,
+   "level": "orange",
+   "reason": "고의존자 대비 금연캠프 이용이 전국 평균보다 적습니다."
+  },
+  {
+   "sido": "경기도",
+   "registered": 55093,
+   "high": 8929,
+   "camp": 1172,
+   "orgs": 51,
+   "highPct": 16.2,
+   "campPer1000": 131,
+   "perOrg": 1080,
+   "level": "orange",
+   "reason": "고의존자 대비 금연캠프 이용이 전국 평균보다 적습니다."
+  },
+  {
+   "sido": "서울특별시",
+   "registered": 38325,
+   "high": 5762,
+   "camp": 655,
+   "orgs": 26,
+   "highPct": 15.0,
+   "campPer1000": 114,
+   "perOrg": 1474,
+   "level": "orange",
+   "reason": "고의존자 대비 금연캠프 이용이 전국 평균보다 적습니다."
+  },
+  {
+   "sido": "광주광역시",
+   "registered": 7020,
+   "high": 1043,
+   "camp": 255,
+   "orgs": 6,
+   "highPct": 14.9,
+   "campPer1000": 244,
+   "perOrg": 1170,
+   "level": "green",
+   "reason": "고의존자 비율과 금연캠프 이용이 모두 평균보다 양호합니다."
+  },
+  {
+   "sido": "울산광역시",
+   "registered": 6183,
+   "high": 881,
+   "camp": 450,
+   "orgs": 6,
+   "highPct": 14.2,
+   "campPer1000": 511,
+   "perOrg": 1030,
+   "level": "green",
+   "reason": "고의존자 비율과 금연캠프 이용이 모두 평균보다 양호합니다."
+  },
+  {
+   "sido": "제주특별자치도",
+   "registered": 5123,
+   "high": 706,
+   "camp": 255,
+   "orgs": 7,
+   "highPct": 13.8,
+   "campPer1000": 361,
+   "perOrg": 732,
+   "level": "green",
+   "reason": "고의존자 비율과 금연캠프 이용이 모두 평균보다 양호합니다."
+  }
+ ]
+}
