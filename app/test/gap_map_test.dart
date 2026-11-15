@@ -125,6 +125,30 @@ void main() {
       expect(find.textContaining('테스트 경계'), findsOneWidget);
     });
 
+    testWidgets('출처 문구가 휴대폰 하단 조작 막대 영역과 겹치지 않는다', (tester) async {
+      const barHeight = 48.0; // 화면 맨 아래, 시스템이 쓰는 영역
+      await tester.pumpWidget(
+        MaterialApp(
+          home: MediaQuery(
+            data: const MediaQueryData(
+              size: Size(800, 600),
+              padding: EdgeInsets.only(bottom: barHeight),
+            ),
+            child: Scaffold(
+              body: GapMap(
+                map: parseMap(_mapJson),
+                regionOf: (_) => null,
+                onTap: (_) {},
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final source = tester.getRect(find.textContaining('테스트 경계'));
+      expect(source.bottom, lessThanOrEqualTo(600 - barHeight));
+    });
+
     testWidgets('화면 읽기 프로그램에 지도라는 것과 대체 수단(목록)을 알린다', (tester) async {
       await pumpMap(tester);
       expect(find.bySemanticsLabel(RegExp('색칠 지도.*목록')), findsOneWidget);

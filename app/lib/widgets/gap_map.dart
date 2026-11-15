@@ -99,12 +99,16 @@ class _GapMapState extends State<GapMap> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text(
-            '경계 출처: ${widget.map.source}',
-            style: Theme.of(context).textTheme.bodySmall,
-            textAlign: .center,
+        // 휴대폰 하단 조작 막대(홈으로 가는 줄)에 가리지 않게 안전 영역 안에 둔다.
+        SafeArea(
+          top: false,
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              '경계 출처: ${widget.map.source}',
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: .center,
+            ),
           ),
         ),
       ],
