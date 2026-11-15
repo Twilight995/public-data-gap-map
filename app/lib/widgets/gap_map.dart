@@ -42,11 +42,7 @@ class _GapMapState extends State<GapMap> {
   // 테두리 좌표를 그릴 수 있는 Path로 한 번만 바꿔 둔다.
   List<_Area> _buildAreas() => [
     for (final shape in widget.map.shapes)
-      _Area(
-        shape,
-        widget.regionOf(shape),
-        Path()..addPolygonList(shape.rings),
-      ),
+      _Area(shape, widget.regionOf(shape), Path()..addPolygonList(shape.rings)),
   ];
 
   void _handleTap(Offset position, double scale) {
@@ -59,7 +55,9 @@ class _GapMapState extends State<GapMap> {
       } else {
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
-          ..showSnackBar(SnackBar(content: Text('${area.shape.name}: 등록된 데이터가 없습니다')));
+          ..showSnackBar(
+            SnackBar(content: Text('${area.shape.name}: 등록된 데이터가 없습니다')),
+          );
       }
       return;
     }
@@ -142,7 +140,10 @@ class _MapPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     canvas.scale(scale);
     for (final area in areas) {
-      canvas.drawPath(area.path, Paint()..color = levelFillColor(area.region?.level));
+      canvas.drawPath(
+        area.path,
+        Paint()..color = levelFillColor(area.region?.level),
+      );
     }
     // 경계선은 색을 다 칠한 뒤에 그린다(이웃 구역 색에 덮이지 않게).
     // 화면 맞춤 배율과 사용자가 확대한 배율로 나눠, 확대해도 화면에서 같은 굵기로 보이게 한다.
@@ -156,7 +157,8 @@ class _MapPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_MapPainter old) => old.areas != areas || old.scale != scale;
+  bool shouldRepaint(_MapPainter old) =>
+      old.areas != areas || old.scale != scale;
 }
 
 /// 색만으로 구분하지 않도록 색 칸 옆에 글자를 함께 둔다.
@@ -172,7 +174,8 @@ class _Legend extends StatelessWidget {
         runSpacing: 4,
         alignment: .center,
         children: [
-          for (final level in GapLevel.values) _LegendItem(levelFillColor(level), level.label),
+          for (final level in GapLevel.values)
+            _LegendItem(levelFillColor(level), level.label),
           _LegendItem(levelFillColor(null), '데이터 없음'),
         ],
       ),
@@ -194,7 +197,10 @@ class _LegendItem extends StatelessWidget {
         Container(
           width: 16,
           height: 16,
-          decoration: BoxDecoration(color: color, border: Border.all(color: Colors.black54)),
+          decoration: BoxDecoration(
+            color: color,
+            border: Border.all(color: Colors.black54),
+          ),
         ),
         const SizedBox(width: 4),
         Text(label),

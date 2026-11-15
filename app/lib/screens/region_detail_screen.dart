@@ -5,9 +5,8 @@ import '../widgets/level_badge.dart';
 
 /// 목록과 지도가 함께 쓰는 상세 화면 열기.
 void openRegionDetail(BuildContext context, GapRegion region) {
-  Navigator.of(context).push(
-    MaterialPageRoute(builder: (_) => RegionDetailScreen(region)),
-  );
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (_) => RegionDetailScreen(region)));
 }
 
 /// 지역 한 곳의 등급, 이유, 수치.

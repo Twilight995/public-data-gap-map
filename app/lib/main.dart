@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import 'data/region_repository.dart';
+import 'screens/predict_screen.dart';
 import 'screens/region_tab.dart';
 
 void main() => runApp(const GapMapApp());
@@ -14,7 +15,7 @@ class GapMapApp extends StatelessWidget {
       title: '지역 격차 지도',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.indigo)),
       home: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             title: const Text('공공데이터 지역 격차 지도'),
@@ -22,6 +23,7 @@ class GapMapApp extends StatelessWidget {
               tabs: [
                 Tab(icon: Icon(Icons.local_library), text: '도서관'),
                 Tab(icon: Icon(Icons.smoke_free), text: '금연'),
+                Tab(icon: Icon(Icons.fact_check), text: '등급 예측'),
               ],
             ),
           ),
@@ -46,6 +48,7 @@ class GapMapApp extends StatelessWidget {
                     '시도별 니코틴 고의존자 수요와 금연캠프 이용 비교입니다. '
                     '국가금연지원서비스 등록자 기준(2024)입니다.',
               ),
+              const PredictScreen(load: loadPredict),
             ],
           ),
         ),

@@ -68,12 +68,14 @@ List<GapRegion> parseSmoking(String json) => _parse(json, (data) {
           (label: '고의존자', value: '${_count(r['high'])}명'),
           (
             label: '고의존자 비율',
-            value: '${_decimal(r['highPct'])}% (전국 ${_decimal(national['highPct'])}%)',
+            value:
+                '${_decimal(r['highPct'])}% (전국 ${_decimal(national['highPct'])}%)',
           ),
           (label: '금연캠프 이용', value: '${_count(r['camp'])}건'),
           (
             label: '고의존자 1,000명당 캠프 이용',
-            value: '${_count(r['campPer1000'])}건 (전국 ${_count(national['campPer1000'])}건)',
+            value:
+                '${_count(r['campPer1000'])}건 (전국 ${_count(national['campPer1000'])}건)',
           ),
           (label: '금연 지원 기관', value: '${_count(r['orgs'])}곳'),
           (label: '기관 1곳당 등록자', value: '${_count(r['perOrg'])}명'),
@@ -105,10 +107,10 @@ List<GapRegion> _parse(
 }
 
 /// 12023 → "12,023"
-String _count(num n) => n
-    .round()
-    .toString()
-    .replaceAllMapped(RegExp(r'\B(?=(\d{3})+(?!\d))'), (_) => ',');
+String _count(num n) => n.round().toString().replaceAllMapped(
+  RegExp(r'\B(?=(\d{3})+(?!\d))'),
+  (_) => ',',
+);
 
 /// 80.0 → "80", 21.8 → "21.8"
 String _decimal(num n) =>

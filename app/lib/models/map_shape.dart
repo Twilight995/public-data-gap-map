@@ -23,7 +23,11 @@ class MapShape {
 }
 
 class MapData {
-  const MapData({required this.size, required this.source, required this.shapes});
+  const MapData({
+    required this.size,
+    required this.source,
+    required this.shapes,
+  });
 
   final Size size;
   final String source;
@@ -34,7 +38,10 @@ MapData parseMap(String json) {
   try {
     final data = jsonDecode(json) as Map<String, dynamic>;
     return MapData(
-      size: Size((data['width'] as num).toDouble(), (data['height'] as num).toDouble()),
+      size: Size(
+        (data['width'] as num).toDouble(),
+        (data['height'] as num).toDouble(),
+      ),
       source: data['source'],
       shapes: [
         for (final Map<String, dynamic> s in data['shapes'])
@@ -46,7 +53,10 @@ MapData parseMap(String json) {
               for (final List<dynamic> flat in s['rings'])
                 [
                   for (var i = 0; i < flat.length; i += 2)
-                    Offset((flat[i] as num).toDouble(), (flat[i + 1] as num).toDouble()),
+                    Offset(
+                      (flat[i] as num).toDouble(),
+                      (flat[i + 1] as num).toDouble(),
+                    ),
                 ],
             ],
           ),

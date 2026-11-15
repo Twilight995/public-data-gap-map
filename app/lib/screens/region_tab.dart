@@ -25,7 +25,8 @@ class RegionTab extends StatefulWidget {
 }
 
 // 다른 탭에 다녀와도 목록/지도 선택이 유지되도록 상태를 살려 둔다.
-class _RegionTabState extends State<RegionTab> with AutomaticKeepAliveClientMixin {
+class _RegionTabState extends State<RegionTab>
+    with AutomaticKeepAliveClientMixin {
   bool _showMap = false;
 
   @override

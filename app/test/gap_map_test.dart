@@ -38,9 +38,12 @@ const _province = GapRegion(
   stats: [],
 );
 
-Rect _canvas(WidgetTester tester) => tester.getRect(find.byKey(const Key('gap-map-canvas')));
-Offset _westPoint(WidgetTester tester) => _canvas(tester).centerLeft + Offset(_canvas(tester).width * 0.25, 0);
-Offset _eastPoint(WidgetTester tester) => _canvas(tester).centerRight - Offset(_canvas(tester).width * 0.25, 0);
+Rect _canvas(WidgetTester tester) =>
+    tester.getRect(find.byKey(const Key('gap-map-canvas')));
+Offset _westPoint(WidgetTester tester) =>
+    _canvas(tester).centerLeft + Offset(_canvas(tester).width * 0.25, 0);
+Offset _eastPoint(WidgetTester tester) =>
+    _canvas(tester).centerRight - Offset(_canvas(tester).width * 0.25, 0);
 
 void main() {
   group('parseMap', () {
@@ -51,7 +54,12 @@ void main() {
       expect(map.shapes.map((s) => s.name), ['서쪽군', '동쪽군']);
       expect(map.shapes[0].libraryId, '가도 서쪽군');
       expect(map.shapes[1].libraryId, isNull);
-      expect(map.shapes[0].rings.single, const [Offset(0, 0), Offset(100, 0), Offset(100, 100), Offset(0, 100)]);
+      expect(map.shapes[0].rings.single, const [
+        Offset(0, 0),
+        Offset(100, 0),
+        Offset(100, 100),
+        Offset(0, 100),
+      ]);
     });
 
     test('깨진 데이터면 FormatException을 던진다', () {
@@ -60,19 +68,34 @@ void main() {
 
     test('실제 경계 파일: 250개 구역이 모두 테두리를 갖고, 연결 키가 실제 지역을 가리킨다', () {
       final map = parseMap(File('assets/data/map.json').readAsStringSync());
-      final libraries = parseLibraries(File('assets/data/libraries.json').readAsStringSync());
-      final smoking = parseSmoking(File('assets/data/smoking.json').readAsStringSync());
+      final libraries = parseLibraries(
+        File('assets/data/libraries.json').readAsStringSync(),
+      );
+      final smoking = parseSmoking(
+        File('assets/data/smoking.json').readAsStringSync(),
+      );
       final libraryIds = {for (final r in libraries) r.id};
 
       expect(map.shapes, hasLength(250));
       expect(map.shapes.every((s) => s.rings.isNotEmpty), isTrue);
-      expect({for (final s in map.shapes) s.smokingId}, {for (final r in smoking) r.id});
-      expect(map.shapes.where((s) => s.libraryId != null).every((s) => libraryIds.contains(s.libraryId)), isTrue);
+      expect(
+        {for (final s in map.shapes) s.smokingId},
+        {for (final r in smoking) r.id},
+      );
+      expect(
+        map.shapes
+            .where((s) => s.libraryId != null)
+            .every((s) => libraryIds.contains(s.libraryId)),
+        isTrue,
+      );
     });
   });
 
   test('등급마다 칠하는 색이 다르고, 데이터 없음은 따로 구분된다', () {
-    final colors = {for (final level in <GapLevel?>[...GapLevel.values, null]) levelFillColor(level)};
+    final colors = {
+      for (final level in <GapLevel?>[...GapLevel.values, null])
+        levelFillColor(level),
+    };
     expect(colors, hasLength(4));
   });
 
@@ -142,7 +165,10 @@ void main() {
   });
 
   group('RegionMapScreen', () {
-    Future<void> pumpScreen(WidgetTester tester, String? Function(MapShape) idOf) async {
+    Future<void> pumpScreen(
+      WidgetTester tester,
+      String? Function(MapShape) idOf,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -201,7 +227,14 @@ void main() {
           home: DefaultTabController(
             length: 2,
             child: Scaffold(
-              appBar: AppBar(bottom: const TabBar(tabs: [Tab(text: '첫째'), Tab(text: '둘째')])),
+              appBar: AppBar(
+                bottom: const TabBar(
+                  tabs: [
+                    Tab(text: '첫째'),
+                    Tab(text: '둘째'),
+                  ],
+                ),
+              ),
               body: TabBarView(children: [tab(), const Text('둘째 내용')]),
             ),
           ),

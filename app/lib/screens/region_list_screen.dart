@@ -26,7 +26,10 @@ class RegionListScreen extends StatelessWidget {
           child: ListView.builder(
             itemCount: regions.length + 1,
             itemBuilder: (context, i) => i == 0
-                ? Padding(padding: const EdgeInsets.all(16), child: Text(notice))
+                ? Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(notice),
+                  )
                 : _RegionTile(regions[i - 1]),
           ),
         ),

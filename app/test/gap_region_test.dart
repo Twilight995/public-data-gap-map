@@ -55,16 +55,25 @@ void main() {
       String junggu(String sido) =>
           '{"sido": "$sido", "sigungu": "중구", "total": 9, "hub": 3, "local": 6, "readOnly": 0, '
           '"suspect": 0, "weekendClosedPct": 0.0, "level": "green", "reason": "r"}';
-      final json = '{"regions": [${junggu('서울특별시')}, ${junggu('부산광역시')}, ${junggu('대구광역시')}]}';
+      final json =
+          '{"regions": [${junggu('서울특별시')}, ${junggu('부산광역시')}, ${junggu('대구광역시')}]}';
 
-      expect(parseLibraries(json).map((r) => r.subtitle), ['대구광역시', '부산광역시', '서울특별시']);
+      expect(parseLibraries(json).map((r) => r.subtitle), [
+        '대구광역시',
+        '부산광역시',
+        '서울특별시',
+      ]);
     });
 
     test('실제 데이터 파일은 중복 없이 229개 지역이다', () {
-      final regions = parseLibraries(File('assets/data/libraries.json').readAsStringSync());
+      final regions = parseLibraries(
+        File('assets/data/libraries.json').readAsStringSync(),
+      );
 
       expect(regions, hasLength(229));
-      expect({for (final r in regions) '${r.subtitle} ${r.title}'}, hasLength(229));
+      expect({
+        for (final r in regions) '${r.subtitle} ${r.title}',
+      }, hasLength(229));
     });
   });
 
