@@ -7,11 +7,15 @@ class LoadView<T> extends StatefulWidget {
     required this.load,
     required this.isEmpty,
     required this.builder,
+    this.emptyText = '표시할 지역이 없습니다',
   });
 
   final Future<T> Function() load;
   final bool Function(T data) isEmpty;
   final Widget Function(BuildContext context, T data) builder;
+
+  /// 빈 상태에서 보여줄 문구.
+  final String emptyText;
 
   @override
   State<LoadView<T>> createState() => _LoadViewState<T>();
@@ -48,9 +52,9 @@ class _LoadViewState<T> extends State<LoadView<T>> {
         }
         final data = snapshot.data as T;
         if (widget.isEmpty(data)) {
-          return const _Message(
-            icon: Icon(Icons.inbox, size: 48),
-            text: '표시할 지역이 없습니다',
+          return _Message(
+            icon: const Icon(Icons.inbox, size: 48),
+            text: widget.emptyText,
           );
         }
         return widget.builder(context, data);

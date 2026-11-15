@@ -12,7 +12,9 @@ SOURCE = HERE / "source"
 OUT = HERE.parent / "app" / "assets" / "data"
 
 # 원본 데이터의 지명 문제. 고치지 않으면 같은 지역이 두 번 나오고 등급이 서로 어긋난다.
-NAME_FIXES = {"깅화군": "강화군", "하양읍": "경산시"}  # 오타 / 읍은 소속 시로
+# 틀린 이름 → (맞는 이름, 데이터 품질 경고에 남길 설명)
+NAME_FIXES = {"깅화군": ("강화군", "오타로 보여 '강화군'으로 고침"),
+              "하양읍": ("경산시", "읍 이름이라 소속 시 '경산시'로 합침")}
 SIDO_UNIFY = {"전라남도": "전남광주통합특별시", "광주광역시": "전남광주통합특별시"}  # 옛 이름과 새 이름이 섞여 있음
 
 WEEKEND_CLOSED_WARN_PCT = 50
@@ -25,16 +27,35 @@ def read_rows(name):
         return list(csv.DictReader(f))
 
 
-def clean_region(sido, sigungu):
-    """(시도, 시군구) 이름을 하나로 맞춘다: 공백, 반복된 시도 이름, 오타, 옛 시도 이름."""
+def explain_region(sido, sigungu):
+    """((시도, 시군구), 고친 내용 목록). 이름을 하나로 맞추고, 무엇을 고쳤는지 함께 돌려준다."""
+    fixes = []
     sido = sido.strip()
-    name = sigungu.replace("　", " ").strip().removeprefix(sido).strip()
-    if name in ("", "없음"):  # 세종처럼 시군구가 없는 곳은 시도 이름을 그대로 쓴다
+    name = sigungu.replace("　", " ").strip()  # 전각 공백도 공백으로 본다
+    if name != sigungu:
+        fixes.append("이름 앞뒤 공백을 지움")
+    rest = name.removeprefix(sido).strip()
+    if rest in ("", "없음"):  # 세종처럼 시군구가 없는 곳은 시도 이름을 그대로 쓴다 (정상 표기라 고친 내용에 넣지 않는다)
         name = sido
+    elif rest != name:
+        fixes.append("시군구 칸에 반복된 시도 이름을 지움")
+        name = rest
     city, _, district = name.partition(" ")
     if district and city.endswith("시"):  # '창원시 성산구' 같은 일반구는 소속 시로 합친다
+        fixes.append(f"일반구라 소속 시 '{city}'로 합침")
         name = city
-    return SIDO_UNIFY.get(sido, sido), NAME_FIXES.get(name, name)
+    if name in NAME_FIXES:
+        name, why = NAME_FIXES[name]
+        fixes.append(why)
+    if sido in SIDO_UNIFY:
+        sido = SIDO_UNIFY[sido]
+        fixes.append(f"옛 시도 이름을 '{sido}'로 바꿈")
+    return (sido, name), fixes
+
+
+def clean_region(sido, sigungu):
+    """(시도, 시군구) 이름을 하나로 맞춘다: 공백, 반복된 시도 이름, 오타, 옛 시도 이름."""
+    return explain_region(sido, sigungu)[0]
 
 
 def library_level(hub, weekend_closed_pct):

@@ -1,2 +1,5 @@
 # 파이썬 캐시
 __pycache__/
+
+# Claude 미리보기 설정 (내 컴퓨터 전용)
+.claude/

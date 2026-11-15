@@ -3,6 +3,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../models/gap_region.dart';
 import '../models/map_shape.dart';
 import '../models/predict_data.dart';
+import '../models/quality_data.dart';
 
 // 지금은 앱에 든 JSON을 읽는다. 서버가 생기면 이 함수들만 바꾸면 된다.
 
@@ -14,6 +15,9 @@ Future<List<GapRegion>> loadSmokingRegions() async =>
 
 Future<PredictData> loadPredict() async =>
     parsePredict(await rootBundle.loadString('assets/data/predict.json'));
+
+Future<QualityData> loadQuality() async =>
+    parseQuality(await rootBundle.loadString('assets/data/quality.json'));
 
 Future<MapData>? _map;
 

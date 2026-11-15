@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'data/region_repository.dart';
 import 'screens/predict_screen.dart';
+import 'screens/quality_screen.dart';
 import 'screens/region_tab.dart';
 
 void main() => runApp(const GapMapApp());
@@ -19,15 +20,18 @@ class GapMapApp extends StatelessWidget {
         fontFamily: 'Pretendard',
       ),
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
             title: const Text('공공데이터 지역 격차 지도'),
             bottom: const TabBar(
+              // 기본 여백(16)이면 휴대폰 폭에서 탭 4개 중 긴 이름('데이터 품질')이 잘린다.
+              labelPadding: EdgeInsets.symmetric(horizontal: 4),
               tabs: [
                 Tab(icon: Icon(Icons.local_library), text: '도서관'),
                 Tab(icon: Icon(Icons.smoke_free), text: '금연'),
                 Tab(icon: Icon(Icons.fact_check), text: '등급 예측'),
+                Tab(icon: Icon(Icons.report_problem), text: '데이터 품질'),
               ],
             ),
           ),
@@ -53,6 +57,7 @@ class GapMapApp extends StatelessWidget {
                     '국가금연지원서비스 등록자 기준(2024)입니다.',
               ),
               const PredictScreen(load: loadPredict),
+              const QualityScreen(load: loadQuality),
             ],
           ),
         ),
