@@ -58,6 +58,15 @@ flutter:
   assets:
     - assets/data/
 
+  # 한글 글꼴을 앱에 넣는다. 없으면 웹에서 한글이 잠깐 네모로 보인다.
+  # 라이선스(SIL OFL 1.1)는 assets/fonts/Pretendard-LICENSE.txt
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-Regular.otf
+        - asset: assets/fonts/Pretendard-Bold.otf
+          weight: 700
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

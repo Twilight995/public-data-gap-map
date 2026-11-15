@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gap_map/main.dart';
@@ -118,5 +119,23 @@ void main() {
 
     expect(find.text('도서관'), findsOneWidget);
     expect(find.text('금연'), findsOneWidget);
+  });
+
+  testWidgets('앱: 기본 글꼴이 pubspec.yaml 에 등록된 한글 글꼴이고 파일이 있다', (tester) async {
+    await tester.pumpWidget(const GapMapApp());
+    final family = Theme.of(
+      tester.element(find.text('도서관')),
+    ).textTheme.bodyMedium!.fontFamily!;
+
+    // flutter test 는 app/ 폴더에서 실행된다.
+    final pubspec = File('pubspec.yaml').readAsStringSync();
+    expect(pubspec, contains('family: $family'));
+    final fontAssets = RegExp(
+      r'asset: (assets/fonts/\S+)',
+    ).allMatches(pubspec).map((match) => match[1]!).toList();
+    expect(fontAssets, hasLength(2)); // 보통, 굵게
+    for (final asset in fontAssets) {
+      expect(File(asset).existsSync(), isTrue, reason: asset);
+    }
   });
 }

@@ -13,7 +13,11 @@ class GapMapApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '지역 격차 지도',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.indigo)),
+      theme: ThemeData(
+        colorScheme: .fromSeed(seedColor: Colors.indigo),
+        // pubspec.yaml 에 등록한 한글 글꼴. 웹에서 글꼴을 따로 받아오지 않게 한다.
+        fontFamily: 'Pretendard',
+      ),
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
