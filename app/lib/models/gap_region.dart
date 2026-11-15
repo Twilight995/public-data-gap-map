@@ -12,6 +12,9 @@ enum GapLevel {
 
 typedef RegionStat = ({String label, String value});
 
+/// 내려받는 표의 한 칸. 수치는 엑셀에서 계산할 수 있게 단위 없는 숫자(num)로 둔다.
+typedef ExportCell = ({String header, Object value});
+
 /// 목록과 상세 화면이 함께 쓰는 지역 한 곳의 표시용 데이터.
 class GapRegion {
   const GapRegion({
@@ -21,6 +24,7 @@ class GapRegion {
     required this.level,
     required this.reason,
     required this.stats,
+    this.cells = const [],
   });
 
   /// 지도 구역과 연결하는 키. 도서관은 "시도 시군구", 금연은 시도 이름.
@@ -30,6 +34,9 @@ class GapRegion {
   final GapLevel level;
   final String reason;
   final List<RegionStat> stats;
+
+  /// 우선순위표(복사·CSV)에 들어갈 칸. 순위 열은 표를 만들 때 붙는다.
+  final List<ExportCell> cells;
 }
 
 List<GapRegion> parseLibraries(String json) => _parse(json, (data) {
@@ -48,6 +55,17 @@ List<GapRegion> parseLibraries(String json) => _parse(json, (data) {
           (label: '열람 전용 도서관', value: '${_count(r['readOnly'])}곳'),
           (label: '입력 오류 의심', value: '${_count(r['suspect'])}곳'),
           (label: '주말 전면 휴관 비율', value: '${_decimal(r['weekendClosedPct'])}%'),
+        ],
+        cells: [
+          (header: '시도', value: r['sido'] as String),
+          (header: '시군구', value: r['sigungu'] as String),
+          ..._levelCells(r),
+          (header: '전체 도서관(곳)', value: r['total'] as num),
+          (header: '대형 거점 도서관(곳)', value: r['hub'] as num),
+          (header: '동네 작은도서관(곳)', value: r['local'] as num),
+          (header: '열람 전용 도서관(곳)', value: r['readOnly'] as num),
+          (header: '입력 오류 의심(곳)', value: r['suspect'] as num),
+          (header: '주말 전면 휴관 비율(%)', value: r['weekendClosedPct'] as num),
         ],
       ),
   ];
@@ -80,9 +98,30 @@ List<GapRegion> parseSmoking(String json) => _parse(json, (data) {
           (label: '금연 지원 기관', value: '${_count(r['orgs'])}곳'),
           (label: '기관 1곳당 등록자', value: '${_count(r['perOrg'])}명'),
         ],
+        cells: [
+          (header: '시도', value: r['sido'] as String),
+          ..._levelCells(r),
+          (header: '등록자(명)', value: r['registered'] as num),
+          (header: '고의존자(명)', value: r['high'] as num),
+          (header: '고의존자 비율(%)', value: r['highPct'] as num),
+          (header: '전국 고의존자 비율(%)', value: national['highPct'] as num),
+          (header: '금연캠프 이용(건)', value: r['camp'] as num),
+          (header: '고의존자 1,000명당 캠프 이용(건)', value: r['campPer1000'] as num),
+          (
+            header: '전국 고의존자 1,000명당 캠프 이용(건)',
+            value: national['campPer1000'] as num,
+          ),
+          (header: '금연 지원 기관(곳)', value: r['orgs'] as num),
+          (header: '기관 1곳당 등록자(명)', value: r['perOrg'] as num),
+        ],
       ),
   ];
 });
+
+List<ExportCell> _levelCells(Map<String, dynamic> r) => [
+  (header: '등급', value: GapLevel.values.byName(r['level']).label),
+  (header: '이유', value: r['reason'] as String),
+];
 
 /// JSON을 읽어 격차가 큰 순(부족 → 주의 → 양호), 같은 등급은 이름순, 이름도 같으면 부제(시도)순으로 돌려준다.
 /// 모양이 다른 데이터는 전부 FormatException 하나로 모아 화면이 한 가지만 처리하게 한다.

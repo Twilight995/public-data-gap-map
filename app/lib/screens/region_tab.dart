@@ -13,12 +13,16 @@ class RegionTab extends StatefulWidget {
     required this.loadMap,
     required this.idOf,
     required this.notice,
+    this.exportName = '우선순위표',
   });
 
   final Future<List<GapRegion>> Function() loadRegions;
   final Future<MapData> Function() loadMap;
   final String? Function(MapShape shape) idOf;
   final String notice;
+
+  /// 내려받는 우선순위표 파일 이름(확장자 제외).
+  final String exportName;
 
   @override
   State<RegionTab> createState() => _RegionTabState();
@@ -75,6 +79,7 @@ class _RegionTabState extends State<RegionTab>
               : RegionListScreen(
                   load: widget.loadRegions,
                   notice: widget.notice,
+                  exportName: widget.exportName,
                 ),
         ),
       ],

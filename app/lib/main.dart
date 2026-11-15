@@ -43,8 +43,9 @@ class GapMapApp extends StatelessWidget {
                 loadRegions: loadLibraryRegions,
                 loadMap: loadMap,
                 idOf: (shape) => shape.libraryId,
+                exportName: '도서관_우선순위표',
                 notice:
-                    '시군구별 도서관 인프라 격차입니다. 공공데이터포털에 등록된 도서관 기준(2026-10)이라, '
+                    '시군구별 도서관 인프라 격차입니다. 공공데이터포털 전국도서관표준데이터에 등록된 도서관 기준(2026-10)이라, '
                     '등록되지 않은 도서관은 빠져 있을 수 있습니다. '
                     '전라남도와 광주광역시는 전남광주통합특별시로 합쳐 표시합니다.',
               ),
@@ -52,6 +53,7 @@ class GapMapApp extends StatelessWidget {
                 loadRegions: loadSmokingRegions,
                 loadMap: loadMap,
                 idOf: (shape) => shape.smokingId,
+                exportName: '금연_우선순위표',
                 notice:
                     '시도별 니코틴 고의존자 수요와 금연캠프 이용 비교입니다. '
                     '국가금연지원서비스 등록자 기준(2024)입니다.',
